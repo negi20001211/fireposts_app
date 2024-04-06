@@ -1,0 +1,24 @@
+/* base.html */
+.nav-link{
+    color: white;
+}
+.nav-link:hover{
+    animation: changeColor 1s forwards;
+}
+@keyframes changeColor  {
+    0%{
+        color: white;
+    }
+    100%{
+        color: aqua;
+    }
+}
+.menu{
+    /* margin-right: 50rem; */
+}
+.left_col td {font-size: 0.7rem;
+}
+.left_col th{font-size: 0.7rem;
+}
+.light_col td{
+}

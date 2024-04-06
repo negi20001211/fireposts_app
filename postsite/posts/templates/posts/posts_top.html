@@ -1,1 +1,47 @@
-投稿一覧
+{% extends 'base.html' %}
+
+{% block body %}
+
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-2 left_col">
+          <table class=" table ">
+            <tr>
+                <th>タイトル</th>
+                <th>投稿者</th>
+                <th>投稿日時</th>
+                <th></th>
+            </tr>
+            <tr>
+                <td>タイトル</td>
+                <td>投稿者</td>
+                <td>投稿日時</td>
+                <td></td>
+            </tr>   
+          </table>
+        </div>
+        {% if posts %}
+        <div class="col-10 light_col">
+            <table class="table">
+                <tr>
+                    <th>タイトル</th>
+                    <th>投稿者</th>
+                    <th>投稿日時</th>
+                    <th></th>
+                </tr>
+                
+                {% for post in posts %}   
+                <tr>
+                    <td>{{post.title}}</td>
+                    <td>{{post.created_by}}</td>
+                    <td>{{post.created_at}}</td>
+                    <td></td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endblock %}
