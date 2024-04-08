@@ -1,1 +1,35 @@
-詳細ページ
+{% extends 'base.html' %}
+
+
+
+{% block body %}
+<div class="container">
+    <br>
+    <h3 class="nav">{{post.title}}</h3>
+    <br>
+    <table class="">
+        <tr>
+            <td>投稿者</td>
+            <td>: {{post.created_by}}</td>
+        </tr>
+        <tr>
+            <td>投稿日時</td>
+            <td>: {{post.created_at|date:"Y年m月d日"}}</td>
+        </tr>
+    </table>
+    <table class="table">
+        <tr>
+             <textarea name="textarea" cols="150" rows="30">
+                {{post.text}}
+             </textarea>
+        </tr>
+        <tr>
+            <td><pre>{{post.file}}</pre></td>
+        </tr>
+    </table>
+   
+</div> 
+{% endblock  %}
+
+
+<h3 class="">{{post.title}}</h3>

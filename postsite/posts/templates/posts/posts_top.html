@@ -1,9 +1,22 @@
 {% extends 'base.html' %}
 
+{% block head %}
+   {% load humanize %}
+{% endblock %}
+    
+
 {% block body %}
 
-
-<div class="container-fluid">
+<nav class="navbar bg-black new_post_navbar">
+    <div class="container-fluid">
+    <ul class="nav">
+        <li class="nav-item">
+            <a href="{% url 'post_new' %}" class="nav-link new_post_link">投稿を作成する</a>
+        </li>
+    </ul>
+    </div>
+</nav>
+<div class="container-fluid post_all">
     <div class="row">
         <div class="col-2 left_col">
           <table class=" table ">
@@ -33,9 +46,13 @@
                 
                 {% for post in posts %}   
                 <tr>
-                    <td>{{post.title}}</td>
+                    <td><a href="{% url 'post_detail' post.id %}" class="nav-link detail_link">{{post.title}}</a></td>
                     <td>{{post.created_by}}</td>
-                    <td>{{post.created_at}}</td>
+                    {% if post.created_at|date:"Ymd" == today%}
+                    <td>{{post.created_at|time:"H:i"}}</td>
+                    {% else %}
+                    <td>{{post.created_at|date:"Y年m月d日"}}</td>
+                    {% endif %}
                     <td></td>
                 </tr>
                 {% endfor %}

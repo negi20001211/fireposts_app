@@ -1,5 +1,5 @@
-from django.shortcuts import render
-from posts.models import Post
+from django.shortcuts import render,get_object_or_404
+from posts.models import Post 
 
 def top(request):
     return render(request,'posts/top.html')
@@ -14,7 +14,8 @@ def post_new(request):
     
 
 def post_detail(request,post_id):
-    return render(request,'posts/post_detail.html')
+    post = get_object_or_404(Post,pk=post_id)
+    return render(request,'posts/post_detail.html',{'post':post})
 
 def post_edit(request,post_id):
     return render(request,'posts/post_edit.html')

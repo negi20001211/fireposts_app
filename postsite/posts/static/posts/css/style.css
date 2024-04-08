@@ -1,9 +1,13 @@
 /* base.html */
-.nav-link{
+
+.home_link{
+    font-size: 1.5rem;
+}
+.header_nav{
     color: white;
 }
-.nav-link:hover{
-    animation: changeColor 1s forwards;
+.header_nav:hover{
+    animation: changeColor 0.5s forwards;
 }
 @keyframes changeColor  {
     0%{
@@ -13,12 +17,36 @@
         color: aqua;
     }
 }
-.menu{
-    /* margin-right: 50rem; */
+.detail_link{
+    color: black;
 }
+.detail_link:hover{
+    animation: change 0.5s forwards;
+}
+@keyframes change  {
+    0%{
+        color: black;
+    }
+    100%{
+        color: aqua;
+    }
+}
+
+.post_all{
+    padding: 0 25px;
+}
+.new_post_navbar{
+    height: 2rem;
+}
+.new_post_navbar li{
+    line-height: 0;
+}
+.new_post_link{
+    font-size: 0.8rem;
+}
+
+
 .left_col td {font-size: 0.7rem;
 }
 .left_col th{font-size: 0.7rem;
-}
-.light_col td{
 }
