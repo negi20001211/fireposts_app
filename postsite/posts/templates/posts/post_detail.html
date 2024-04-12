@@ -3,6 +3,19 @@
 
 
 {% block body %}
+
+{% if request.user == post.created_by %}
+<nav class="navbar bg-black new_post_navbar">
+    <div class="container-fluid">
+    <ul class="nav">
+        <li class="nav-item">
+            <a href="{% url 'post_edit' post.id %}" class="nav-link new_post_link">投稿を編集する</a>
+        </li>
+    </ul>
+    </div>
+</nav>
+{% endif %}
+
 <div class="container">
     <br>
     <h3 class="nav">{{post.title}}</h3>
