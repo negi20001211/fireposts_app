@@ -1,15 +1,18 @@
 from django.shortcuts import render,get_object_or_404,redirect
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import Group
 from django.http import HttpResponseForbidden
 from posts.models import Post
 from posts.forms import PostForm
+
 
 def top(request):
     return render(request,'posts/top.html')
 
 def posts_top(request):
     posts = Post.objects.all()
-    context = {'posts':posts}
+    group = Group.objects.all()
+    context = {'posts':posts,'group': group}
     return render(request,'posts/posts_top.html',context)
 
 @login_required
@@ -41,6 +44,11 @@ def post_edit(request,post_id):
          form = PostForm(instance=post)
     return render(request,'posts/post_edit.html',{'form':form})            
 
+def group_posts(request,group_id):
+    group = get_object_or_404(Group,id=group_id)
+    user = group.user_set.all()
+    posts = Post.objects.filter(created_by__in=user)
+    return render(request,'posts/group_posts.html',{'posts':posts})
 
 
     

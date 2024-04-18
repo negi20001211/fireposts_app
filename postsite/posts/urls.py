@@ -6,5 +6,6 @@ urlpatterns = [
     path('post_new/',views.post_new,name='post_new'),
     path('<int:post_id>/',views.post_detail,name='post_detail'),
     path('<int:post_id>/edit/',views.post_edit,name='post_edit'),
+    path('group_posts/<int:group_id>/',views.group_posts,name='group_posts')
     
 ]

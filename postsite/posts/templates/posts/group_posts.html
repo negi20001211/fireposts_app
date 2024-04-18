@@ -1,34 +1,20 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
+
 
 {% block head %}
    {% load humanize %}
 {% endblock %}
-    
+
 
 {% block body %}
 
-<nav class="navbar bg-black new_post_navbar">
-    <div class="container-fluid">
-    <ul class="nav">
-        <li class="nav-item">
-            <a href="{% url 'post_new' %}" class="nav-link new_post_link">投稿を作成する</a>
-        </li>
-    </ul>
-    </div>
-</nav>
 <div class="container-fluid post_all">
     <div class="row">
-        <div class="col-2 left_col"> 
-            <h6 class="groups">所属一覧</h6>
-                {% for group in group %}
-                <p class="group_name">
-                    <a class="nav-link detail_link" href="{% url 'group_posts' group.id %}">{{group.name}}</a>
-                </p>
-                {% endfor %}               
+        <div class="col-2 left_col">
+            <h6 class="groups">所属職員一覧</h6>
         </div>
-        {% if posts %}
         <div class="col-10 light_col">
-            <p class="posts">投稿一覧</p>
+            <p class="posts">所属内投稿一覧</p>
             <table class="table">
                 <tr>
                     <th>タイトル</th>
@@ -36,8 +22,7 @@
                     <th>投稿日時</th>
                     <th></th>
                 </tr>
-                
-                {% for post in posts %}   
+                {% for post in posts %}
                 <tr>
                     <td><a href="{% url 'post_detail' post.id %}" class="nav-link detail_link">{{post.title}}</a></td>
                     <td>{{post.created_by}}</td>
@@ -46,12 +31,12 @@
                     {% else %}
                     <td>{{post.created_at|date:"Y年m月d日"}}</td>
                     {% endif %}
-                    <td></td>
                 </tr>
-                {% endfor %}
+            {% endfor %}    
             </table>
         </div>
     </div>
 </div>
-{% endif %}
-{% endblock %}
+{% endblock body %}
+
+

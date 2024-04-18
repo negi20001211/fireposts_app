@@ -45,8 +45,18 @@
     font-size: 0.8rem;
 }
 
-
-.left_col td {font-size: 0.7rem;
+.left_col{
+    padding-top: 0.4rem;
+    padding-left: 1rem;
+    border-right: solid;
+    
 }
-.left_col th{font-size: 0.7rem;
+.group_name{font-size: 0.8rem;
+}
+.posts{
+    padding:  0.3rem 0 0 0 ;
+    font-weight: bold;
+}
+.groups{
+    padding-bottom: 1.2rem;
 }
