@@ -33,7 +33,7 @@
             {% if user.is_authenticated %}
             <form action="{% url 'logout' %}" method="post">
                 {% csrf_token %}
-                <li class="nav-item"><button type="submit">ログアウト</button></li>
+                <li class="nav-item"><button class="btn btn-light" type="submit">ログアウト</button></li>
             </form>
             {% endif %}
         </ul>

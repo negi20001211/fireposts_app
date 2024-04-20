@@ -3,9 +3,9 @@
 {% block body %}
 <div class="container-fluid">
     <div class="row">
-        <div class="col-7 top_post">
-            <table class="table">
-                <tr>
+        <div class="col-7">
+            <table class="table top_post_table">
+                <tr class="top_post_th">
                     <th>タイトル</th>
                     <th>投稿者</th>
                     <th>投稿日時</th>
@@ -13,7 +13,7 @@
                 </tr>
                 
                 {% for post in posts %}   
-                <tr>
+                <tr class="top_post_td">
                     <td><a href="{% url 'post_detail' post.id %}" class="nav-link detail_link">{{post.title}}</a></td>
                     <td>{{post.created_by}}</td>
                     {% if post.created_at|date:"Ymd" == today%}

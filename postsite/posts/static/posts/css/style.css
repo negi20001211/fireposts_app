@@ -19,9 +19,32 @@
 }
 /* base.html_end */
 
+
+
 /* top.html */
 
+.top_post{
+    border: solid;
+}
+.col-7{
+    /* background-color: aqua; */
+}
+.col-5{
+    /* background-color: red; */
+}    
+.top_post_table{
+    border: 1px solid black;
+    /* border-radius: 10px; */
+    overflow: hidden;
+    width: 90%;
+    margin: 2rem;
+    /* font-size: small; */
+}
+.top_post_th{}
+.top_post_td{}
 /* top.html_end*/
+
+
 
 /* detail.html */
 .detail_link{
@@ -39,6 +62,8 @@
     }
 }
 /* detail.html_end */
+
+
 
 /* posts_top.html */
 .post_all{
