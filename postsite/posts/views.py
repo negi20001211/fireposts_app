@@ -7,7 +7,10 @@ from posts.forms import PostForm
 
 
 def top(request):
-    return render(request,'posts/top.html')
+    posts = Post.objects.all()
+    context = {'posts':posts,}
+    return render(request,'posts/top.html',context)
+    
 
 def posts_top(request):
     posts = Post.objects.all()
@@ -46,9 +49,9 @@ def post_edit(request,post_id):
 
 def group_posts(request,group_id):
     group = get_object_or_404(Group,id=group_id)
-    user = group.user_set.all()
-    posts = Post.objects.filter(created_by__in=user)
-    return render(request,'posts/group_posts.html',{'posts':posts})
+    users = group.user_set.all()
+    posts = Post.objects.filter(created_by__in=users)
+    return render(request,'posts/group_posts.html',{'posts':posts,'users':users})
 
 
     

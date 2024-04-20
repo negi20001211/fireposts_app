@@ -1,6 +1,40 @@
 {% extends 'base.html' %}
 
 {% block body %}
-<p class="text">hellow</p>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-7 top_post">
+            <table class="table">
+                <tr>
+                    <th>タイトル</th>
+                    <th>投稿者</th>
+                    <th>投稿日時</th>
+                    <th></th>
+                </tr>
+                
+                {% for post in posts %}   
+                <tr>
+                    <td><a href="{% url 'post_detail' post.id %}" class="nav-link detail_link">{{post.title}}</a></td>
+                    <td>{{post.created_by}}</td>
+                    {% if post.created_at|date:"Ymd" == today%}
+                    <td>{{post.created_at|time:"H:i"}}</td>
+                    {% else %}
+                    <td>{{post.created_at|date:"Y年m月d日"}}</td>
+                    {% endif %}
+                    <td></td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+        <div class="col-5 d-flex flex-column">
+            <div class="bg-blue">
+                上半分
+            </div>
+            <div class="bg-yellow">
+                下半分
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}
     

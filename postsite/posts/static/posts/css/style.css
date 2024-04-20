@@ -17,6 +17,13 @@
         color: aqua;
     }
 }
+/* base.html_end */
+
+/* top.html */
+
+/* top.html_end*/
+
+/* detail.html */
 .detail_link{
     color: black;
 }
@@ -31,7 +38,9 @@
         color: aqua;
     }
 }
+/* detail.html_end */
 
+/* posts_top.html */
 .post_all{
     padding: 0 25px;
 }
@@ -60,3 +69,4 @@
 .groups{
     padding-bottom: 1.2rem;
 }
+/* posts_top.html_end */
