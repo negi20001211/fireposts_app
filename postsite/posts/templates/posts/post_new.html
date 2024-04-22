@@ -2,11 +2,11 @@
 {% load django_bootstrap5 %}
 
 {% block body %}
-<div class=container>
-    <form method="post">
+<div class="container">
+    <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {% bootstrap_form form %}
-        <button type="submit" class="">
+        <button type="submit" class="btn btn-dark">
             投稿
         </button>
     </form>

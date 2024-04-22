@@ -5,7 +5,7 @@ from django.http import HttpResponseForbidden
 from posts.models import Post
 from posts.forms import PostForm
 
-
+@login_required
 def top(request):
     posts = Post.objects.all()
     context = {'posts':posts,}
@@ -21,7 +21,7 @@ def posts_top(request):
 @login_required
 def post_new(request):
     if request.method == 'POST':
-        form = PostForm(request.POST)
+        form = PostForm(request.POST,request.FILES)
         if form.is_valid():
             post = form.save(commit=False)
             post.created_by = request.user

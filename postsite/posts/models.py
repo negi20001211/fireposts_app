@@ -8,4 +8,4 @@ class Post(models.Model):
     created_by = models.ForeignKey(settings.AUTH_USER_MODEL,verbose_name='投稿者',on_delete=models.CASCADE)
     created_at = models.DateTimeField('投稿日',auto_now_add=True)
     update_at = models.DateTimeField('更新日',auto_now=True)
-    file = models.FileField('添付ファイル',blank=True)
+    file = models.FileField('添付ファイル',upload_to='uploads/%Y/%m/%d/',blank=True)

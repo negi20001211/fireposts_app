@@ -35,7 +35,7 @@
              <textarea readonly name="textarea" cols="150" rows="20" style="resize:none">{{post.text}}</textarea>
         </tr>
         <tr>
-            <td><pre>{{post.file}}</pre></td>
+            <td>添付ファイル：<a href="{{ post.file.url }}" target="_blank">{{post.file}}</a></td>
         </tr>
     </table>
    
