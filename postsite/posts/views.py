@@ -4,18 +4,21 @@ from django.contrib.auth.models import Group
 from django.http import HttpResponseForbidden
 from posts.models import Post
 from posts.forms import PostForm
+from datetime import datetime
 
 @login_required
 def top(request):
-    posts = Post.objects.all()
-    context = {'posts':posts,}
+    posts = Post.objects.all().order_by('-created_at')
+    now = datetime.now()
+    context = {'posts':posts,'now':now}
     return render(request,'posts/top.html',context)
     
 
 def posts_top(request):
-    posts = Post.objects.all()
+    posts = Post.objects.all().order_by('-created_at')
     group = Group.objects.all()
-    context = {'posts':posts,'group': group}
+    now = datetime.now()
+    context = {'posts':posts,'group': group,'now':now}
     return render(request,'posts/posts_top.html',context)
 
 @login_required

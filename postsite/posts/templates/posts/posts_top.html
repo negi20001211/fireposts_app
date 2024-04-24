@@ -27,7 +27,7 @@
                 {% endfor %}               
         </div>
         {% if posts %}
-        <div class="col-10 light_col">
+        <div class="col-10 light_col bg_color">
             <p class="posts">投稿一覧</p>
             <table class="table">
                 <tr>
@@ -41,12 +41,11 @@
                 <tr>
                     <td><a href="{% url 'post_detail' post.id %}" class="nav-link detail_link">{{post.title}}</a></td>
                     <td>{{post.created_by}}</td>
-                    {% if post.created_at|date:"Ymd" == today%}
+                    {% if post.created_at|date:"Ymd" == now|date:"Ymd" %}
                     <td>{{post.created_at|time:"H:i"}}</td>
                     {% else %}
                     <td>{{post.created_at|date:"Y年m月d日"}}</td>
                     {% endif %}
-                    <td></td>
                 </tr>
                 {% endfor %}
             </table>

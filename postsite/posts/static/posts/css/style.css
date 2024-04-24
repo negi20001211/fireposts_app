@@ -1,5 +1,7 @@
 /* base.html */
-
+body{
+    background-color: rgba(218, 226, 226, 0.979);
+}
 .home_link{
     font-size: 1.5rem;
 }
@@ -17,28 +19,27 @@
         color: aqua;
     }
 }
+.bg_color{
+    background-color: #fff;
+}
 /* base.html_end */
 
 
 
 /* top.html */
-
-.top_post{
-    border: solid;
+.top_row{
+    margin:1rem 0;
 }
 .col-7{
-    /* background-color: aqua; */
+    border-radius: 20px;
+    margin: 0 1rem;
 }
-.col-5{
-    /* background-color: red; */
-}    
+
 .top_post_table{
-    border: 1px solid black;
-    /* border-radius: 10px; */
+    /* border: 1px solid black; */
     overflow: hidden;
     width: 90%;
     margin: 2rem;
-    /* font-size: small; */
 }
 .top_post_th{}
 .top_post_td{}

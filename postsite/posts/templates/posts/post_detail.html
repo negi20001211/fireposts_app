@@ -16,7 +16,7 @@
 </nav>
 {% endif %}
 
-<div class="container">
+<div class="container bg_color">
     <br>
     <h3 class="nav">{{post.title}}</h3>
     <br>
@@ -27,12 +27,12 @@
         </tr>
         <tr>
             <td>投稿日時</td>
-            <td>: {{post.created_at|date:"Y年m月d日"}}</td>
+            <td>: {{post.created_at}}</td>
         </tr>
-    </table>
+    </table><br>
     <table class="table">
         <tr>
-             <textarea readonly name="textarea" cols="150" rows="20" style="resize:none">{{post.text}}</textarea>
+             <textarea readonly name="textarea" cols="120" rows="20" style="resize:none">{{post.text}}</textarea>
         </tr>
         <tr>
             <td>添付ファイル：<a href="{{ post.file.url }}" target="_blank">{{post.file}}</a></td>

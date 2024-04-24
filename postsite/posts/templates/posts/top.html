@@ -2,8 +2,8 @@
 
 {% block body %}
 <div class="container-fluid">
-    <div class="row">
-        <div class="col-7">
+    <div class="row top_row">
+        <div class="col-7 bg_color">
             <table class="table top_post_table">
                 <tr class="top_post_th">
                     <th>タイトル</th>
@@ -16,7 +16,7 @@
                 <tr class="top_post_td">
                     <td><a href="{% url 'post_detail' post.id %}" class="nav-link detail_link">{{post.title}}</a></td>
                     <td>{{post.created_by}}</td>
-                    {% if post.created_at|date:"Ymd" == today%}
+                    {% if post.created_at|date:"Ymd" == now|date:"Ymd"%}
                     <td>{{post.created_at|time:"H:i"}}</td>
                     {% else %}
                     <td>{{post.created_at|date:"Y年m月d日"}}</td>
@@ -26,7 +26,7 @@
                 {% endfor %}
             </table>
         </div>
-        <div class="col-5 d-flex flex-column">
+        <div class="col-3 d-flex flex-column">
             <div class="bg-blue">
                 上半分
             </div>
