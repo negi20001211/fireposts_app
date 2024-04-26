@@ -1,0 +1,15 @@
+{% extends "sc_base.html" %}
+
+{% block head %}
+
+{% endblock head %}
+
+{% block body %}
+
+{% load static %}
+<div id='calendar'class="bg_color"></div>
+<script src='https://cdn.jsdelivr.net/npm/fullcalendar/index.global.min.js'></script>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+<script src="{% static 'schedule/js/app.js' %}"></script>
+
+{% endblock body %}
