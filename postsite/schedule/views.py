@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect,get_object_or_404
-
+from django.urls import reverse
 from schedule.models import Event
 from schedule.forms import EventForm
 import datetime
@@ -42,30 +42,47 @@ def schedule_top(request):
     day_count = (datetime.datetime(next_year, next_month, 1) - datetime.datetime(year, month, 1)).days
 
     # １日が何曜日か
-    youbi = timestamp.weekday()
+    youbi = (timestamp.weekday()) 
 
     # カレンダー作成の準備
     weeks = []
     week = ''
 
     # 第１週目：空のセルを追加
-    week += '<td colspan="{}"></td>'.format(youbi)
+    if youbi != 0:
+       week += '<td colspan="{}"></td>'.format(youbi)
 
     for day in range(1, day_count + 1):
         date = datetime.date(year, month, day)
-
+    
+        events_for_date = Event.objects.filter(start_time__year=year, start_time__month=month, start_time__day=day)
+        
         if date == datetime.date.today():
-            # 今日の日付の場合は、class="today"をつける
-            week += '<td class="today">{}</td>'.format(day)
+        # 今日の日付の場合は、class="today"をつける
+            if events_for_date.exists():
+                week += '<td class="today" style="width: 150px;">'
+            else:
+                week += '<td class="today" style="width: 150px;">'
+            week += '{}<br>'.format(day)  # 日付を追加
+            for event in events_for_date:
+                event_url = reverse('schedule_detail', kwargs={'pk': event.id})
+                week += '<div class="event"><a href="{}">{}</a></div>'.format(event_url, event.title) # イベントのタイトルを追加
+            week += '</td>'
         else:
-            week += '<td>{}</td>'.format(day)
-
+            if events_for_date.exists():
+                week += '<td style="width: 150px;">'
+            else:
+                week += '<td style="width: 150px;">'
+            week += '{}<br>'.format(day)  # 日付を追加
+            for event in events_for_date:
+                event_url = reverse('schedule_detail', kwargs={'pk': event.id})
+                week += '<div class="event"><a href="{}">{}</a></div>'.format(event_url, event.title)  # イベントのタイトルを追加
+            week += '</td>'
+                
         # 週終わり、または、月終わりの場合
         if (day + youbi) % 7 == 0 or day == day_count:
             weeks.append('<tr>{}</tr>'.format(week))
             week = ''
-            
-        events = get_object_or_404(Event)
            
     context = {
         'html_title': html_title,

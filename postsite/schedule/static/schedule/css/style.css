@@ -44,4 +44,7 @@ th:nth-of-type(7), td:nth-of-type(7) {
 th:nth-of-type(6), td:nth-of-type(6) {
     color: blue;
 }
+.event{
+    font-size: small;
+}
 /* schedule_top.html_end */
