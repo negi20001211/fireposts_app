@@ -29,7 +29,8 @@ INSTALLED_APPS = [
     'posts.apps.PostsConfig',
     'django_bootstrap5',
     'django.contrib.humanize',
-    'accounts.apps.AccountsConfig'
+    'accounts.apps.AccountsConfig',
+    'schedule.apps.ScheduleConfig'
 ]
 
 MIDDLEWARE = [

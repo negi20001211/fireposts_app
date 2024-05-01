@@ -1,0 +1,50 @@
+/* sc_base.html */
+body{
+    background-color: rgba(218, 226, 226, 0.979);
+}
+.home_link{
+    font-size: 1.5rem;
+}
+.header_nav{
+    color: white;
+}
+.header_nav:hover{
+    animation: changeColor 0.5s forwards;
+}
+@keyframes changeColor  {
+    0%{
+        color: white;
+    }
+    100%{
+        color: aqua;
+    }
+}
+.bg_color{
+    background-color: #fff;
+}
+/* base.html_end */
+
+/* schedule_top.html */
+a {
+    text-decoration: none;
+}
+th {
+    height: 30px;
+    text-align: center;
+}
+td {
+    height: 100px;
+}
+.today {
+    background: orange !important;
+}
+th:nth-of-type(7), td:nth-of-type(7) {
+    color: red;
+}
+th:nth-of-type(6), td:nth-of-type(6) {
+    color: blue;
+}
+.event{
+    font-size: small;
+}
+/* schedule_top.html_end */

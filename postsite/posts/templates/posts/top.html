@@ -26,12 +26,38 @@
                 {% endfor %}
             </table>
         </div>
-        <div class="col-3 d-flex flex-column">
-            <div class="bg-blue">
-                上半分
+        <div class="col-4 d-flex flex-column">
+            <div class="bg_color calendar">
+                <h6>{{ html_title }}</h6>
+                <th><a href="?ym={{ prev }}">前月</a></th>
+                <th colspan="5"></th>
+                <th><a href="?ym={{ next }}">次月</a></th>
+                <table class="table table-bordered">
+                    <tbody>
+                        <tr>
+                            <th>月</th>
+                            <th>火</th>
+                            <th>水</th>
+                            <th>木</th>
+                            <th>金</th>
+                            <th>土</th>
+                            <th>日</th>
+                            <td>
+                                {% for week in weeks %}
+                                {{ week|safe }}
+                                {% endfor %}
+                                
+                                {% for event in event %}
+                                
+                                {% endfor %}
+                                    
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
             <div class="bg-yellow">
-                下半分
+                メッセージ
             </div>
         </div>
     </div>
