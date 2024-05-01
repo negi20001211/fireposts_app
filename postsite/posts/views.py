@@ -2,22 +2,100 @@ from django.shortcuts import render,get_object_or_404,redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import Group
 from django.http import HttpResponseForbidden
+from django.urls import reverse
 from posts.models import Post
 from posts.forms import PostForm
-from datetime import datetime
+import datetime
+from schedule.models import Event  
+from schedule.forms import EventForm 
 
 @login_required
 def top(request):
     posts = Post.objects.all().order_by('-created_at')
-    now = datetime.now()
-    context = {'posts':posts,'now':now}
-    return render(request,'posts/top.html',context)
+    now = datetime.datetime.now()
+
+    # スケジュールのデータを取得
+    timezone = 'Asia/Tokyo'
+
+    if 'ym' in request.GET and request.GET['ym']:
+        ym = request.GET['ym']
+    else:
+        today = datetime.datetime.now()
+        ym = today.strftime('%Y-%m')
+
+    year, month = map(int, ym.split('-'))
+    try:
+        timestamp = datetime.datetime(year, month, 1)
+    except ValueError:
+        today = datetime.datetime.now()
+        ym = today.strftime('%Y-%m')
+        timestamp = datetime.datetime(today.year, today.month, 1)
+
+    html_title = timestamp.strftime('%Y年%m月')
+    prev_month = timestamp - datetime.timedelta(days=1)
+    prev = prev_month.strftime('%Y-%m')
+    next_month = timestamp + datetime.timedelta(days=32)
+    next = next_month.strftime('%Y-%m')
+    next_month = month + 1
+    next_year = year
+    if next_month > 12:
+        next_month = 1
+        next_year += 1
+    day_count = (datetime.datetime(next_year, next_month, 1) - datetime.datetime(year, month, 1)).days
+    
+    youbi = (timestamp.weekday()) 
+
+    weeks = []
+    week = ''
+
+    if youbi != 0:
+       week += '<td colspan="{}"></td>'.format(youbi)
+
+    for day in range(1, day_count + 1):
+        date = datetime.date(year, month, day)
+    
+        events_for_date = Event.objects.filter(start_time__year=year, start_time__month=month, start_time__day=day)
+        
+        if date == datetime.date.today():
+            if events_for_date.exists():
+                week += '<td class="today" style="width: 50px;">'
+            else:
+                week += '<td class="today" style="width: 50px;">'
+            week += '{}<br>'.format(day)  
+            for event in events_for_date:
+                event_url = reverse('schedule_detail', kwargs={'pk': event.id})
+                week += '<div class="event"><a href="{}">{}</a></div>'.format(event_url, event.title) # イベントのタイトルを追加
+            week += '</td>'
+        else:
+            if events_for_date.exists():
+                week += '<td style="width: 50px;">'
+            else:
+                week += '<td style="width: 50px;">'
+            week += '{}<br>'.format(day)  
+            for event in events_for_date:
+                event_url = reverse('schedule_detail', kwargs={'pk': event.id})
+                week += '<div class="event"><a href="{}">{}</a></div>'.format(event_url, event.title)  # イベントのタイトルを追加
+            week += '</td>'
+                
+        if (day + youbi) % 7 == 0 or day == day_count:
+            weeks.append('<tr>{}</tr>'.format(week))
+            week = ''
+           
+    context = {
+        'posts': posts,
+        'now': now,
+        'html_title': html_title,
+        'prev': prev,
+        'next': next,
+        'weeks': weeks,
+    }
+    return render(request, 'posts/top.html', context)
     
 
 def posts_top(request):
     posts = Post.objects.all().order_by('-created_at')
     group = Group.objects.all()
-    now = datetime.now()
+    now = datetime.datetime.now()
     context = {'posts':posts,'group': group,'now':now}
     return render(request,'posts/posts_top.html',context)
 

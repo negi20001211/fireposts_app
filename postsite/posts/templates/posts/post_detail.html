@@ -34,9 +34,15 @@
         <tr>
              <textarea readonly name="textarea" cols="120" rows="20" style="resize:none">{{post.text}}</textarea>
         </tr>
+        {% if  post.file %}
         <tr>
             <td>添付ファイル：<a href="{{ post.file.url }}" target="_blank">{{post.file}}</a></td>
         </tr>
+        {% else %}
+        <tr>
+            <td>添付ファイル：なし</td>
+        </tr>
+        {% endif %}
     </table>
    
 </div> 
