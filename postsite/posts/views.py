@@ -58,9 +58,9 @@ def top(request):
         
         if date == datetime.date.today():
             if events_for_date.exists():
-                week += '<td class="today" style="width: 50px;">'
+                week += '<td class="today" style="width: 50px; height: 100px;">'
             else:
-                week += '<td class="today" style="width: 50px;">'
+                week += '<td class="today" style="width: 50px; height: 100px;">'
             week += '{}<br>'.format(day)  
             for event in events_for_date:
                 event_url = reverse('schedule_detail', kwargs={'pk': event.id})

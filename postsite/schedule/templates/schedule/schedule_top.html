@@ -7,14 +7,23 @@
 {% block body %}
 {% load static %}
 
+<nav class="navbar bg-black new_schedule_navbar">
+    <div class="container-fluid">
+    <ul class="nav">
+        <li class="nav-item">
+            <a href="{% url 'schedule_new' %}" class="nav-link new_schedule_link">予定を作成する</a>
+        </li>
+    </ul>
+    </div>
+</nav>
+
 <div class="container bg_color">
     <h2>{{ html_title }}</h2>
     <th><a href="?ym={{ prev }}">前月</a></th>
-                <th colspan="5"></th>
-                <th><a href="?ym={{ next }}">次月</a></th>
+    <th><a href="?ym={{ next }}">次月</a></th>
     <table class="table table-bordered">
         <tbody>
-            <tr>
+            <tr class="calendar">
                 <th>月</th>
                 <th>火</th>
                 <th>水</th>

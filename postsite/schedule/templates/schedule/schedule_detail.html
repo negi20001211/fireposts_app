@@ -1,0 +1,22 @@
+{% extends "sc_base.html" %}
+
+{% block body %}
+<div class="container bg_color">
+    <h3 class=pt-2>{{event.title}}</h3>
+    <table class="table-bordered">
+            <td class="detail_title">時間</td>
+            <td class="detail_str">{{event.start_time}}&nbsp;～&nbsp;{{event.end_time}}</td>
+        </tr>
+         <tr>
+            <td class="detail_title">作成者</td>
+            <td class="detail_str">{{event.created_by}}</td>
+        </tr>
+        <tr>
+            <td class="detail_text_title">内容</td>
+            <td class="detail_text">{{event.memo}}</td>
+        </tr>
+       
+    </table>
+    コメント
+</div>
+{% endblock body %}
