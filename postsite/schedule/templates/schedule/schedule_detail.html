@@ -1,0 +1,35 @@
+{% extends "sc_base.html" %}
+
+{% block body %}
+
+{% if request.user == event.created_by %}
+<nav class="navbar bg-black new_schedule_navbar">
+    <div class="container-fluid">
+    <ul class="nav">
+        <li class="nav-item">
+            <a href="{% url 'schedule_edit' event.pk %}" class="nav-link new_schedule_link">予定を編集する</a>
+        </li>
+    </ul>
+    </div>
+</nav>
+{% endif %}
+
+<div class="container bg_color">
+    <h3 class=pt-2>{{event.title}}</h3>
+    <table class="table-bordered">
+            <td class="detail_title">時間</td>
+            <td class="detail_str">{{event.start_time}}&nbsp;～&nbsp;{{event.end_time}}</td>
+        </tr>
+         <tr>
+            <td class="detail_title">作成者</td>
+            <td class="detail_str">{{event.created_by}}</td>
+        </tr>
+        <tr>
+            <td class="detail_text_title">内容</td>
+            <td class="detail_text">{{event.memo}}</td>
+        </tr>
+       
+    </table>
+    コメント
+</div>
+{% endblock body %}

@@ -4,6 +4,8 @@ from schedule.models import Event
 from schedule.forms import EventForm
 import datetime
 from django.contrib.auth.decorators import login_required
+
+@login_required
 def schedule_top(request):
     timezone = 'Asia/Tokyo'
 
@@ -43,14 +45,13 @@ def schedule_top(request):
 
     for day in range(1, day_count + 1):
         date = datetime.date(year, month, day)
-    
         events_for_date = Event.objects.filter(start_time__year=year, start_time__month=month, start_time__day=day)
         
         if date == datetime.date.today():
             if events_for_date.exists():
-                week += '<td class="today" style="width: 150px;">'
+                week += '<td class="today" style="width: 150px; height: 100px;">'
             else:
-                week += '<td class="today" style="width: 150px;">'
+                week += '<td class="today" style="width: 150px; height: 100px;">'
             week += '{}<br>'.format(day)  
             for event in events_for_date:
                 event_url = reverse('schedule_detail', kwargs={'pk': event.id})
@@ -58,9 +59,9 @@ def schedule_top(request):
             week += '</td>'
         else:
             if events_for_date.exists():
-                week += '<td style="width: 150px;">'
+                week += '<td style="width: 150px; height: 100px;">'
             else:
-                week += '<td style="width: 150px;">'
+                week += '<td style="width: 150px; height: 100px;">'
             week += '{}<br>'.format(day)  
             for event in events_for_date:
                 event_url = reverse('schedule_detail', kwargs={'pk': event.id})
@@ -85,14 +86,35 @@ def schedule_new(request):
     if request.method == 'POST':
         form = EventForm(request.POST)
         if form.is_valid():
-            event = form.save()
-            return redirect('schedule_top',event_id=event.pk)
-        return render(request,'schedule/schedule_new.html',{'event':event})
+            event = form.save(commit=False)
+            event.created_by = request.user
+            event.save()
+            return redirect('schedule_top')
+    else:
+        form = EventForm()
+    return render(request,'schedule/schedule_new.html',{'form':form})
     
     
-@login_required
-def schedule_detail(request,event_id):
-    event = get_object_or_404(Event,id=event_id)
+def schedule_detail(request,pk):
+    event = get_object_or_404(Event,pk=pk)
     return render(request,'schedule/schedule_detail.html',{'event':event})
+
+
+def schedule_edit(request,pk):
+    event = get_object_or_404(Event,pk=pk)
     
+    if request.method == 'POST':
+        
+        if 'delete' in request.POST:
+            event.delete()
+            return redirect('schedule_top')
+        
+        form = EventForm(request.POST,instance=event)
+        if form.is_valid():
+            event = form.save()
+            return redirect('schedule_detail',pk=event.pk)
+    else:
+         form = EventForm(instance=event)
+        
+    return render(request,'schedule/schedule_edit.html',{'form':form})
 # Create your views here.

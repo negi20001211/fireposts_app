@@ -28,13 +28,6 @@ body{
 a {
     text-decoration: none;
 }
-th {
-    height: 30px;
-    text-align: center;
-}
-td {
-    height: 100px;
-}
 .today {
     background: orange !important;
 }
@@ -47,4 +40,34 @@ th:nth-of-type(6), td:nth-of-type(6) {
 .event{
     font-size: small;
 }
+.new_schedule_navbar{
+    height: 2rem;
+}
+.new_schedule_navbar li{
+    line-height: 0;
+}
+.new_schedule_link{
+    font-size: 0.8rem;
+}
 /* schedule_top.html_end */
+
+/* schedule_detail.html*/
+.detail_title{
+    height: 50px;
+    width: 70px;
+}
+.detail_title_text_{
+    height: 150px;
+    width: 70px;
+}
+.detail_text{
+    height: 150px;
+    width: 1100px;
+}
+.detail_text_{
+    height: 150px;
+    width: 200px;
+}
+
+
+/* schedule_detail.html_end*/

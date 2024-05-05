@@ -6,10 +6,14 @@
     <form method="post">
         {% csrf_token %}
         {% bootstrap_form form %}
-        <button type="submit" class="">
+        <div class="edit_button"> 
+        <button type="submit" class="btn btn-dark">
             投稿
         </button>
-    </form>
-  
+        <button type="submit" class="btn btn-dark" name="delete">
+            削除
+        </button>
+        </div>
+    </form> 
 </div>    
 {% endblock body %}

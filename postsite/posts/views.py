@@ -58,13 +58,13 @@ def top(request):
         
         if date == datetime.date.today():
             if events_for_date.exists():
-                week += '<td class="today" style="width: 50px;">'
+                week += '<td class="today" style="width: 50px; height: 50px;">'
             else:
-                week += '<td class="today" style="width: 50px;">'
+                week += '<td class="today" style="width: 50px; height: 50px;">'
             week += '{}<br>'.format(day)  
             for event in events_for_date:
                 event_url = reverse('schedule_detail', kwargs={'pk': event.id})
-                week += '<div class="event"><a href="{}">{}</a></div>'.format(event_url, event.title) # イベントのタイトルを追加
+                week += '<div class="event"><a href="{}" style="white-space: nowrap";>{}</a></div>'.format(event_url, event.title) 
             week += '</td>'
         else:
             if events_for_date.exists():
@@ -74,7 +74,7 @@ def top(request):
             week += '{}<br>'.format(day)  
             for event in events_for_date:
                 event_url = reverse('schedule_detail', kwargs={'pk': event.id})
-                week += '<div class="event"><a href="{}">{}</a></div>'.format(event_url, event.title)  # イベントのタイトルを追加
+                week += '<div class="event"><a href="{}" style="white-space: nowrap";>{}</a></div>'.format(event_url, event.title)  # イベントのタイトルを追加
             week += '</td>'
                 
         if (day + youbi) % 7 == 0 or day == day_count:
@@ -120,6 +120,11 @@ def post_detail(request,post_id):
 def post_edit(request,post_id):
     post = get_object_or_404(Post,pk=post_id)
     if request.method == 'POST':
+        
+        if 'delete' in request.POST:
+            post.delete()
+            return redirect('posts_top')
+        
         form = PostForm(request.POST,instance=post)
         if form.is_valid():
             post = form.save()
@@ -135,6 +140,5 @@ def group_posts(request,group_id):
     return render(request,'posts/group_posts.html',{'posts':posts,'users':users})
 
 
-    
 
 
