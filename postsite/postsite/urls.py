@@ -9,6 +9,7 @@ urlpatterns = [
     path('posts/',include('posts.urls')),
     path('accounts/',include('accounts.urls')),
     path('schedule/',include('schedule.urls')),
+    path('message/',include("message.urls")),
     path('admin/', admin.site.urls),
 ]
 if settings.DEBUG:

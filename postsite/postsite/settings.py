@@ -30,7 +30,8 @@ INSTALLED_APPS = [
     'django_bootstrap5',
     'django.contrib.humanize',
     'accounts.apps.AccountsConfig',
-    'schedule.apps.ScheduleConfig'
+    'schedule.apps.ScheduleConfig',
+    'message.apps.MessageConfig'
 ]
 
 MIDDLEWARE = [
