@@ -98,5 +98,23 @@ def schedule_new(request):
 def schedule_detail(request,pk):
     event = get_object_or_404(Event,pk=pk)
     return render(request,'schedule/schedule_detail.html',{'event':event})
+
+
+def schedule_edit(request,pk):
+    event = get_object_or_404(Event,pk=pk)
     
+    if request.method == 'POST':
+        
+        if 'delete' in request.POST:
+            event.delete()
+            return redirect('schedule_top')
+        
+        form = EventForm(request.POST,instance=event)
+        if form.is_valid():
+            event = form.save()
+            return redirect('schedule_detail',pk=event.pk)
+    else:
+         form = EventForm(instance=event)
+        
+    return render(request,'schedule/schedule_edit.html',{'form':form})
 # Create your views here.

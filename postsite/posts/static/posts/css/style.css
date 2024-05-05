@@ -40,6 +40,10 @@ body{
     width: 90%;
     margin: 2rem;
 }
+.top_schedule{
+    width: 24rem;
+    height: 15rem;
+}
 .today {
     background: orange !important;
 }

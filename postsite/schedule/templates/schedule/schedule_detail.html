@@ -1,6 +1,19 @@
 {% extends "sc_base.html" %}
 
 {% block body %}
+
+{% if request.user == event.created_by %}
+<nav class="navbar bg-black new_schedule_navbar">
+    <div class="container-fluid">
+    <ul class="nav">
+        <li class="nav-item">
+            <a href="{% url 'schedule_edit' event.pk %}" class="nav-link new_schedule_link">予定を編集する</a>
+        </li>
+    </ul>
+    </div>
+</nav>
+{% endif %}
+
 <div class="container bg_color">
     <h3 class=pt-2>{{event.title}}</h3>
     <table class="table-bordered">
