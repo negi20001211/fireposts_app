@@ -1,0 +1,25 @@
+/* base.html */
+body{
+    background-color: rgba(218, 226, 226, 0.979);
+}
+.home_link{
+    font-size: 1.5rem;
+}
+.header_nav{
+    color: white;
+}
+.header_nav:hover{
+    animation: changeColor 0.5s forwards;
+}
+@keyframes changeColor  {
+    0%{
+        color: white;
+    }
+    100%{
+        color: aqua;
+    }
+}
+.bg_color{
+    background-color: #fff;
+}
+/* base.html_end */

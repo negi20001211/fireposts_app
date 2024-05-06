@@ -1,0 +1,43 @@
+{% load static %}
+{% load django_bootstrap5 %}
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+    <link rel="stylesheet" href="{%static 'message/css/style.css'%}">
+    
+    {% block head %}{% endblock %}
+        
+</head>
+<body>
+<nav class="navbar bg-dark">
+    <div class="container-fluid">
+        <ul class="nav">
+            <li class="navbar-brand"><a href="/" class="nav-link header_nav home_link">FirePosts</a></li>
+        </ul>
+        <ul class="nav menu">
+            {% if user.is_authenticated %}
+            <li class="nav-item"><a href="{% url 'posts_top' %}" class="nav-link header_nav">掲示板</a></li>
+            <li class="nav-item"><a href="{% url 'schedule_top' %}" class="nav-link header_nav">スケジュール</a></li>
+            <li class="nav-item"><a href="{% url 'message_list' %}" class="nav-link header_nav">メッセージ</a></li>
+            {% else %}
+            <li class="nav-item"><a href="{% url 'signup' %}" class="nav-link header_nav">アカウント作成</a></li>
+            {% endif %}
+
+            {% if user.is_authenticated %}
+            <form action="{% url 'logout' %}" method="post">
+                {% csrf_token %}
+                <li class="nav-item"><button class="btn btn-light" type="submit">ログアウト</button></li>
+            </form>
+            {% endif %}
+        </ul>
+    </div>
+</nav>
+    {% block body %}{% endblock %}
+</body>
+</html>

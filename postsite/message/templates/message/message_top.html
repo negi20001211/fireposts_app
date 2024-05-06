@@ -1,0 +1,53 @@
+{% extends "ms_base.html" %}
+
+{% block body %}
+
+<nav class="navbar bg-black new_post_navbar">
+    <div class="container-fluid">
+    <ul class="nav">
+        <li class="nav-item">
+            <a href="{% url 'message_new' %}" class="nav-link new_post_link">メッセージを作成する</a>
+        </li>
+    </ul>
+    </div>
+</nav>
+
+<div class="container-fluid post_all">
+    <div class="row">
+        <div class="col-2 left_col"> 
+                <p class="group_name">
+                    <a class="nav-link detail_link" href="{% url 'message_list' %}">受信箱</a>
+                </p>
+                <p class="group_name">
+                    <a class="nav-link detail_link" href="{% url 'message_list' %}">送信箱</a>
+                </p>
+        </div>
+        {% if message %}
+        <div class="col-10 light_col bg_color">
+            <p class="posts">受信一覧</p>
+            <table class="table">
+                <tr>
+                    <th>タイトル</th>
+                    <th>送信者</th>
+                    <th>投稿日時</th>
+                    <th></th>
+                </tr>
+                
+                {% for message in message %}   
+                <tr>
+                    {% comment %} <td><a href="{% url 'message_detail' message.id %}" class="nav-link detail_link">{{message.title}}</a></td> {% endcomment %}
+                    <td>{{message.sender}}</td>
+                    {% if message.created_at|date:"Ymd" == now|date:"Ymd" %}
+                    <td>{{message.created_at|time:"H:i"}}</td>
+                    {% else %}
+                    <td>{{message.created_at|date:"Y年m月d日"}}</td>
+                    {% endif %}
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+{% endblock body %}
