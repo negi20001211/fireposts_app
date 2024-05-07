@@ -7,13 +7,38 @@ def message_top(request):
     message = Message.objects.filter(recipient=request.user)
     return render(request,'message/message_top.html',{'message':message})
 
+def message_sent(request):
+    message = Message.objects.filter(sender=request.user)
+    return render(request,'message/message_sent.html',{'message':message})
+
+def message_detail(request,message_id):
+    message = get_object_or_404(Message,pk=message_id)
+    return render(request,'message/message_detail.html',{'message':message})
+
 def message_new(request):
     if request.method == 'POST':
         form = MessageForm(request.POST)
         if form.is_valid():
             message = form.save(commit=False)
-            request.user = message.created_by
+            message.sender = request.user
             message.save()
-            return redirect('message_top')
+            return redirect('message_list')
     else:
-        return render(request,'message/message_new.html',{'form':form})    
+        form = MessageForm()
+        return render(request,'message/message_new.html',{'form':form})
+    
+def message_edit(request,message_id):
+    message = get_object_or_404(Message,pk=message_id)
+    
+    if request.method == 'POST':
+        if 'delete' in request.POST:
+            message.delete()
+            return redirect('message_list')
+        form = MessageForm(request.POST,instance=message)
+        if form.is_valid():
+            message.save()
+            return redirect('message_list')
+    else:
+        form = MessageForm(instance=message)
+        return render(request,'message/message_edit.html',{'form':form})
+    

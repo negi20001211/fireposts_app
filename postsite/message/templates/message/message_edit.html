@@ -1,0 +1,19 @@
+{% extends 'ms_base.html' %}
+{% load django_bootstrap5 %}
+
+{% block body %}
+<div class="container">
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        <div class="edit_button"> 
+            <button type="submit" class="btn btn-dark">
+                送信
+            </button>
+            <button type="submit" class="btn btn-dark" name="delete">
+                削除
+            </button>
+            </div>
+    </form>
+</div>    
+{% endblock body %}

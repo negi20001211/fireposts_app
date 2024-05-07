@@ -14,29 +14,29 @@
 
 <div class="container-fluid">
     <div class="row">
-        <div class="col-2"> 
-                <p class="">
+        <div class="col-2 left_col"> 
+                <p class="group_name">
                     <a class="nav-link" href="{% url 'message_list' %}">受信箱</a>
                 </p>
-                <p class="">
+                <p class="group_name">
                     <a class="nav-link" href="{% url 'message_sent_list' %}">送信箱</a>
                 </p>
         </div>
         {% if message %}
         <div class="col-10 light_col bg_color">
-            <p class="">受信一覧</p>
+            <p class="posts">送信一覧</p>
             <table class="table">
                 <tr>
                     <th>タイトル</th>
-                    <th>送信者</th>
-                    <th>投稿日時</th>
+                    <th>受信者</th>
+                    <th>送信日時</th>
                     <th></th>
                 </tr>
                 
                 {% for message in message %}   
                 <tr>
-                    <td><a href="{% url 'message_detail' message.id %}" class="nav-link detail_link">{{message.title}}</a></td>
-                    <td>{{message.sender}}</td>
+                    <td><a href="{% url 'message_detail' message.id %}" class="nav-link">{{message.title}}</a></td>
+                    <td>{{message.recipient}}</td>
                     {% if message.created_at|date:"Ymd" == now|date:"Ymd" %}
                     <td>{{message.created_at|time:"H:i"}}</td>
                     {% else %}

@@ -56,8 +56,26 @@
                     </tbody>
                 </table>
             </div>
-            <div class="bg-yellow">
-                メッセージ
+            <div class="bg_color message">
+                <p class="">受信メッセージ</p>
+                <table class="table">
+                <tr>
+                    <th>タイトル</th>
+                    <th>送信者</th>
+                    <th>受信日時</th>
+                </tr>
+                {% for message in message %}   
+                <tr>
+                    <td><a href="{% url 'message_detail' message.id %}" class="nav-link detail_link">{{message.title}}</a></td>
+                    <td>{{message.sender}}</td>
+                    {% if message.created_at|date:"Ymd" == now|date:"Ymd" %}
+                    <td>{{message.created_at|time:"H:i"}}</td>
+                    {% else %}
+                    <td>{{message.created_at|date:"Y年m月d日"}}</td>
+                    {% endif %}
+                </tr>
+                {% endfor %}
+            </table>
             </div>
         </div>
     </div>

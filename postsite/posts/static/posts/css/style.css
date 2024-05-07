@@ -31,13 +31,13 @@ body{
     margin:1rem 0;
 }
 .col-7{
+    height: 37.5rem;
     border-radius: 20px;
     margin: 0 1rem;
+    overflow: scroll;
 }
 
 .top_post_table{
-    overflow: hidden;
-    width: 90%;
     margin: 2rem;
 }
 .top_schedule{
@@ -57,6 +57,14 @@ th:nth-of-type(6), td:nth-of-type(6) {
     font-size: 0.4rem;
 }
 .calendar{
+    border-radius: 10px;
+    padding-left: 1rem;
+    padding-top: 0.5rem;
+}
+.message{
+    height: 15rem;
+    overflow: scroll;
+    margin-top: 1rem;
     border-radius: 10px;
     padding-left: 1rem;
     padding-top: 0.5rem;

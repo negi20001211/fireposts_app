@@ -1,0 +1,38 @@
+{% extends 'ms_base.html' %}
+
+{% block body %}
+
+{% if request.user == message.sender %}
+<nav class="navbar bg-black new_post_navbar">
+    <div class="container-fluid">
+    <ul class="nav">
+        <li class="nav-item">
+            <a href="{% url 'message_edit' message.id %}" class="nav-link new_post_link">メッセージを編集する</a>
+        </li>
+    </ul>
+    </div>
+</nav>
+{% endif %}
+
+<div class="container bg_color">
+    <br>
+    <h3 class="nav">{{message.title}}</h3>
+    <br>
+    <table class="">
+        <tr>
+            <td>送信者</td>
+            <td>: {{message.sender}}</td>
+        </tr>
+        <tr>
+            <td>投稿日時</td>
+            <td>: {{message.created_at}}</td>
+        </tr>
+    </table><br>
+    <table class="table">
+        <tr>
+             <textarea readonly name="textarea" cols="120" rows="15" style="resize:none">{{message.text}}</textarea>
+        </tr>
+    </table>
+   
+</div> 
+{% endblock  %}

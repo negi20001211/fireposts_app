@@ -8,6 +8,7 @@ from posts.forms import PostForm
 import datetime
 from schedule.models import Event  
 from schedule.forms import EventForm 
+from message.models import Message
 
 @login_required
 def top(request):
@@ -80,6 +81,8 @@ def top(request):
         if (day + youbi) % 7 == 0 or day == day_count:
             weeks.append('<tr>{}</tr>'.format(week))
             week = ''
+    
+        message = Message.objects.filter(recipient=request.user)    
            
     context = {
         'posts': posts,
@@ -88,6 +91,7 @@ def top(request):
         'prev': prev,
         'next': next,
         'weeks': weeks,
+        'message':message,
     }
     return render(request, 'posts/top.html', context)
     
