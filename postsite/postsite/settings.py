@@ -135,13 +135,5 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
 
-try:
-    from .local_settings import *
-except ImportError:
-    pass
 
-if not DEBUG:
-    SECRET_KEY = '***************************************'   # 削除したSECRET_KEYをコピペします
-    import django_heroku
-    django_heroku.settings(locals())
 
